@@ -110,4 +110,14 @@ Here's a [link to my video result](./project_video_output.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+When testing out my implementation on the challenge video it failed quite harshly. The lane lines were jumping all around the place without a cohesive and consistent location. I believe this is due to rapidly changing lighting and environment conditions, like color of the road. 
+
+In order to combat this quite large problems a couple things could be done:
+
+- As mentioned in my first submision review, a deep learning approach could be implemented to more robustly handle shadows and color changes as the video progresses. The output labels could be threshold ranges, such that images with more exposure to the light have an overall higher threshold range for the S channel in the HLS çolor space.
+
+- Averaging the overall brightness of an image could be determined using the L channel in the HLS color space to modify the thresholding ranges in a more hardcoded approach than deep learning. Less computationally intesnse than deep learning but also, most likely, less performant on average.
+
+- More work could been done to smooth out the line changes from frame to frame by averaging together "good" lines in order to combat those outliers which were made quite obvious in the challenge video.
+
+- Combining more color spaces and ditching the computationally intense process of using Sobel for gradients in the x direction. Utilizing more color spaces than just the S and L channels in the HLS color space would allow for a more generalized a cohesive approach for determing lane lines.
